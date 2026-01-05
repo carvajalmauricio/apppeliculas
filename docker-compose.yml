@@ -19,23 +19,23 @@ services:
       retries: 5
 
   # Next.js + Socket.io App
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: syncwatch-app
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/sync_watch_db
-      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
-    depends_on:
-      db:
-        condition: service_healthy
-    command: >
-      sh -c "npx prisma migrate deploy && npx tsx server.ts"
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: syncwatch-app
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     - NODE_ENV=production
+  #     - DATABASE_URL=postgresql://postgres:postgres@db:5432/sync_watch_db
+  #     - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   command: >
+  #     sh -c "npx prisma migrate deploy && npx tsx server.ts"
 
 volumes:
   postgres_data:
